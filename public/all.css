@@ -8,6 +8,7 @@ body
     flex-direction: column;
     font-family: 'Monofett', cursive;
     font-family: 'Nunito', sans-serif;
+    min-height: 100vh;
 }
 
 header
@@ -19,6 +20,7 @@ header
     font-size: 3em;
     color: white;
     background-color: black;
+    text-align: center;
 }
 
 footer
@@ -31,14 +33,16 @@ footer
     justify-content: end;
     align-items: flex-end;
     padding: 10px;
+    flex-shrink: 0;
 }
 
 footer > a
 {
     color: white;
+    margin: 0;
 }
 
 main
 {
-    margin: 50px 0;
+    flex-grow: 1;    
 }

@@ -1,10 +1,33 @@
 <main>
+    <nav>
+        <div class="nav_div">
+            <label for="ckb_hide_ID">Ukryj wykonane</label>
+            <input type="checkbox" name="hide_completed" id="ckb_hide_ID" {{#if checkbox}}checked{{/if}}>
+        </div>
+
+        <div class="nav_div">
+            <label for="rd_asc_ID">Sortuj od najnowszych</label>
+            <input type="radio" name="groupType" id="rd_asc_ID" {{#if radio}}checked{{/if}}>
+        </div>
+
+        <div class="nav_div">
+            <label for="rd_desc_ID">Sortuj od najstarszych</label>
+            <input type="radio" name="groupType" id="rd_desc_ID" {{#unless radio}}checked{{/unless}}>
+        </div>
+
+        <div class="nav_div">
+            <button id="filter_button_ID">Filtruj</button>
+        </div>
+    </nav>
+
+    
     <a href="./new">
         <div class="add_task">
             <i class="material-icons">add_circle_outline</i>
             <p>Dodaj zadanie</p>
         </div>
     </a>
+   
     
     {{#each tasks}}
 
@@ -33,3 +56,4 @@
 
     {{/each}}
 </main>
+<script src="./list-script.js"></script>

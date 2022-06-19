@@ -7,10 +7,49 @@ main
     position: relative;
 }
 
+nav
+{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: center;
+    background-color: black;
+    padding: 20px;
+    margin-bottom: 50px;
+    color: white;
+    flex-wrap: wrap;
+}
+
+button
+{
+    color: white;
+    background-color: black;
+    border: white solid 3px;
+    border-radius: 2px;
+    outline: none;
+    font-family: inherit;
+    padding: 8px 24px;
+    cursor: pointer;
+}
+
+.nav_div
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 4px 16px;
+}
+
+input, label
+{
+    cursor: pointer;
+}
+
+
 .add_task
 {
     width: 300px;
-    margin: 10px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -35,9 +74,8 @@ main
     display: flex;
     flex-direction: column;
     width: 300px;
-    margin: 10px;
     box-sizing: border-box;
-    border: solid 6px black;
+    /* border: solid 2px black; */
     border-radius: 17px;
     background: repeating-linear-gradient(#f9d97b, #f9d97b 20px, #d29958 20px, #d29958 25px);
     height: auto;
@@ -47,6 +85,7 @@ main
 a
 {
     text-decoration: none;
+    margin: 10px;
 }
 
 .task_header

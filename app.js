@@ -20,11 +20,21 @@ app.use(express.static(__dirname + '/public'));
 
 
 app.get('/', (request, response) => {
-    let result = [], fields = [];
+    let hide = false;
+    if (request.query.hide !== undefined) hide = (request.query.hide === 'true') | false;
+    let sort = true;
+    if (request.query.asc !== undefined) sort = (request.query.asc === 'true') | false;
+
+
     connection.getConnection((error, connection) => {
         if (error) throw error;
 
-        let sql = "SELECT * FROM tasks";
+        let where = '';
+        if (hide) where = 'WHERE completed = 0';
+
+        let order = (sort ? 'DESC' : 'ASC');
+
+        let sql = `SELECT * FROM tasks ${where} ORDER BY creation_date ${order}`;
         connection.query(sql, (error, q_result) => {
             connection.release();
             if (error) throw error;
@@ -44,7 +54,9 @@ app.get('/', (request, response) => {
 
             response.render('list', {
                 tasks: result, 
-                style: './list.css'
+                style: './list.css',
+                checkbox: hide,
+                radio: sort
             });
         });
     });
