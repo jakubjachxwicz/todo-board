@@ -54,10 +54,37 @@ app.get('/', (request, response) => {
 
             response.render('list', {
                 tasks: result, 
-                style: './list.css',
+                style: '/list.css',
                 checkbox: hide,
                 radio: sort
             });
+        });
+    });
+})
+
+
+app.get('/task/:taskID', (request, response) => {
+    const {taskID} = request.params;
+
+    connection.getConnection((error, connection) => {
+        if (error) throw error;
+        
+        let sql = 'SELECT * FROM tasks';
+        connection.query(sql, (error, q_result) => {
+            connection.release();
+            if (error) throw error;
+
+            const task = q_result.find((task) => task.id === Number(taskID));
+
+            if (!task) response.redirect('/new');
+            else
+            {
+                response.render('edit', {
+                    put: true,
+                    task: task,
+                    style: '/edit.css'
+                });
+            }
         });
     });
 })
