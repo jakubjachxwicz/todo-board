@@ -9,8 +9,5 @@ completed TINYINT(1),
 completion_date DATETIME
 );
 
-CREATE ROLE 'todo_managemnent';
-GRANT SELECT, INSERT, UPDATE, DELETE ON `todo_list`.`tasks` TO 'todo_managemnent';
-
 CREATE USER IF NOT EXISTS 'todo'@'localhost' IDENTIFIED BY 'V4nd4lPL';
-GRANT 'todo_managemnent' TO 'todo'@'localhost';
+GRANT SELECT, INSERT, UPDATE, DELETE ON `todo_list`.`tasks` TO 'todo'@'localhost';
