@@ -1,3 +1,28 @@
 <main>
-    <h1>aaa</h1>
+    <div>
+        add task
+    </div>
+    
+    {{#each result}}
+
+        <div>
+            <h3>
+                {{ this.title }}
+            </h3>
+            <div>
+                {{ this.content }}
+            </div>
+            <p>
+                Utworzono: {{ this.creation_date }}
+            </p>
+            {{#if this.completed}}
+
+                <p>
+                    Ukończono: {{ this.completion_date }}
+                </p>
+
+            {{/if}}
+        </div>
+
+    {{/each}}
 </main>

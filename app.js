@@ -19,22 +19,18 @@ app.use(express.static(__dirname + '/public'));
 
 
 app.get('/', (request, response) => {
-    let result, fields;
+    let result = [], fields = [];
     connection.getConnection((error, connection) => {
         if (error) throw error;
 
         let sql = "SELECT * FROM tasks";
-        connection.query(sql, (error, q_result, q_fields) => {
+        connection.query(sql, (error, result, fields) => {
             connection.release();
             if (error) throw error;
 
-            result = q_result;
-            field = q_fields;
-        })
+            response.render('list', {result: result, fields: fields});
+        });
     });
-    
-    
-    response.render('list', {result: result, fields: fields});
 })
 
 
