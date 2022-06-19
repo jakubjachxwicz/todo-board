@@ -1,28 +1,35 @@
 <main>
-    <div>
-        add task
-    </div>
+    <a href="./new">
+        <div class="add_task">
+            <i class="material-icons">add_circle_outline</i>
+            <p>Dodaj zadanie</p>
+        </div>
+    </a>
     
-    {{#each result}}
+    {{#each tasks}}
 
-        <div>
-            <h3>
-                {{ this.title }}
-            </h3>
-            <div>
+        <a href="./task/{{ this.id }}">
+            <div class="task">
+            <div class="task_header" style="background-color:  {{ this.color }};">
+                    {{ this.title }}
+            </div>
+            <div class="task_body {{#if this.completed}}completed_task{{/if}}">
                 {{ this.content }}
             </div>
-            <p>
+            <div class="task_footer" style="background-color:  {{ this.color }};">
+                <div>
                 Utworzono: {{ this.creation_date }}
-            </p>
-            {{#if this.completed}}
+                </div>
+                {{#if this.completed}}
 
-                <p>
-                    Ukończono: {{ this.completion_date }}
-                </p>
+                    <div>
+                        Ukończono: {{ this.completion_date }}
+                    </div>
 
-            {{/if}}
+                {{/if}}
+            </div>
         </div>
+        </a>
 
     {{/each}}
 </main>

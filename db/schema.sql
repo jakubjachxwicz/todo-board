@@ -4,6 +4,7 @@ CREATE TABLE `tasks`(
 id INT PRIMARY KEY AUTO_INCREMENT,
 title VARCHAR(30) NOT NULL,
 content VARCHAR(1000),
+color CHAR(7),
 creation_date DATETIME,
 completed TINYINT(1),
 completion_date DATETIME

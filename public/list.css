@@ -1,0 +1,110 @@
+main
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    position: relative;
+}
+
+.add_task
+{
+    width: 300px;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
+    font-weight: 600;
+    padding: 150px 0;
+    border: solid 8px;
+    border-color: steelblue;
+    background-color: lightblue;
+    border-radius: 20px;
+    color: black;
+}
+
+.add_task > i
+{
+    font-size: 1.4em;
+}
+
+.task
+{
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    margin: 10px;
+    box-sizing: border-box;
+    border: solid 6px black;
+    border-radius: 17px;
+    background: repeating-linear-gradient(#f9d97b, #f9d97b 20px, #d29958 20px, #d29958 25px);
+    height: auto;
+    cursor: pointer;
+}
+
+a
+{
+    text-decoration: none;
+}
+
+.task_header
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 1.3em;
+    padding: 20px;
+    border-radius: 10px 10px 0 0;
+    color: white;
+}
+
+.task_footer
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-right: 10px;
+    align-items: flex-end;
+    border-radius: 0 0 10px 10px;
+    color: white;
+    height: 84px;
+}
+
+.task_body, .completed_task
+{
+    flex-basis: 300px;
+    overflow: hidden;
+    text-align: justify;
+    padding: 5px;
+    align-self: stretch;
+    font-size: 1.1em;
+    line-height: 1.5em;
+    font-weight: 600;
+    color: black;
+    position: relative;
+}
+
+.completed_task::after
+{
+    content: '';
+    background: url('./check-mark.png') center no-repeat;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.completed_task::before
+{
+    content: '';
+    background-color: rgba(255, 255, 255, 0.5);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}

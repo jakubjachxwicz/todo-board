@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=Monofett&family=Nunito&display=swap');
+
+body
+{
+    margin: 0;
+    background-color: rgb(207, 223, 225);
+    display: flex;
+    flex-direction: column;
+    font-family: 'Monofett', cursive;
+    font-family: 'Nunito', sans-serif;
+}
+
+header
+{
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3em;
+    color: white;
+    background-color: black;
+}
+
+footer
+{
+    height: 80px;
+    background-color: black;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: flex-end;
+    padding: 10px;
+}
+
+footer > a
+{
+    color: white;
+}
+
+main
+{
+    margin: 50px 0;
+}
