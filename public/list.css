@@ -20,6 +20,14 @@ nav
     flex-wrap: wrap;
 }
 
+@media only screen and (max-width: 720px)
+{
+    nav
+    {
+        flex-direction: column;
+    }
+}
+
 button
 {
     color: white;
