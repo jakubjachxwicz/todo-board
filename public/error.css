@@ -1,0 +1,43 @@
+main
+{
+    display: flex;
+    flex-direction: column;
+    margin: 100px 80px;
+}
+
+main > div
+{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+h5
+{
+    font-size: 2em;
+    margin-bottom: 0;
+}
+
+p
+{
+    font-size: 1.4em;
+}
+
+a
+{
+    color: black;
+    font-size: 1em;
+    margin-top: 50px;
+}
+
+a:hover
+{
+    color: white;
+}
+
+#icon
+{
+    font-size: 3em;
+    margin-right: 30px;
+}

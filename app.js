@@ -28,7 +28,11 @@ app.get('/', (request, response) => {
 
 
     connection.getConnection((error, connection) => {
-        if (error) throw error;
+        if (error) return response.render('error_msg', {
+            layout: 'error',
+            message: 'Błąd połączenia z bazą danych',
+            style: '/error.css'
+        });
 
         let where = '';
         if (hide) where = 'WHERE completed = 0';
@@ -38,7 +42,11 @@ app.get('/', (request, response) => {
         let sql = `SELECT * FROM tasks ${where} ORDER BY creation_date ${order}`;
         connection.query(sql, (error, q_result) => {
             connection.release();
-            if (error) throw error;
+            if (error) return response.render('error_msg', {
+                layout: 'error',
+                message: 'Błąd bazy danych',
+                style: '/error.css'
+            });
 
             let result = [];
             q_result.forEach(value => {
@@ -68,12 +76,20 @@ app.get('/task/:taskID', (request, response) => {
     const {taskID} = request.params;
 
     connection.getConnection((error, connection) => {
-        if (error) throw error;
+        if (error) return response.render('error_msg', {
+            layout: 'error',
+            message: 'Błąd połączenia z bazą danych',
+            style: '/error.css'
+        });
         
         let sql = 'SELECT * FROM tasks';
         connection.query(sql, (error, q_result) => {
             connection.release();
-            if (error) throw error;
+            if (error) return response.render('error_msg', {
+                layout: 'error',
+                message: 'Błąd bazy danych',
+                style: '/error.css'
+            });
 
             const task = q_result.find((task) => task.id === Number(taskID));
 
@@ -101,17 +117,26 @@ app.post('/update', (request, response) => {
 
     if (title === '' || content === '') return response.render('error_msg', {
         layout: 'error',
-        message: 'Błąd wysyłania formularza'
+        message: 'Błąd przesyłania danych. Sprawdź, czy wszystkie pola zostały uzupełnione',
+        style: '/error.css'
     });
 
     connection.getConnection((error, connection) => {
-        if (error) throw error;
+        if (error) return response.render('error_msg', {
+            layout: 'error',
+            message: 'Błąd połączenia z bazą danych',
+            style: '/error.css'
+        });
         
         // let sql = `UPDATE tasks SET title = ?, content = ?, color = ? `;
         let sql = 'SELECT completed FROM tasks WHERE id = ?';
         connection.query(sql, [task_id], (error, q_response) => {
             // connection.release();
-            if (error) throw error;
+            if (error) return response.render('error_msg', {
+                layout: 'error',
+                message: 'Błąd bazy danych',
+                style: '/error.css'
+            });
 
             sql = 'UPDATE tasks SET title = ?, content = ?, color = ?';
 
@@ -123,7 +148,11 @@ app.post('/update', (request, response) => {
 
             connection.query(sql, [title, content, color, task_id], (error, q_response) => {
                 connection.release();
-                if (error) throw error;
+                if (error) return response.render('error_msg', {
+                    layout: 'error',
+                    message: 'Błąd bazy danych',
+                    style: '/error.css'
+                });
 
                 response.redirect('/');
             })
@@ -145,13 +174,18 @@ app.post('/insert', (request, response) => {
 
     if (title === '' || content === '') return response.render('error_msg', {
         layout: 'error',
-        message: 'Błąd wysyłania formularza'
+        message: 'Błąd przesyłania danych. Sprawdź, czy wszystkie pola zostały uzupełnione',
+        style: '/error.css'
     });
 
     
 
     connection.getConnection((error, connection) => {
-        if (error) throw error;
+        if (error) return response.render('error_msg', {
+            layout: 'error',
+            message: 'Błąd połączenia z bazą danych',
+            style: '/error.css'
+        });
 
         let sql = 'INSERT INTO tasks (title, content, color, creation_date, completed, completion_date) VALUES (?, ?, ?, NOW()';
         if (completed == 'on') sql += ', 1, NOW())';
@@ -159,7 +193,11 @@ app.post('/insert', (request, response) => {
 
         connection.query(sql, [title, content, color], (error, q_result) => {
             connection.release();
-            if (error) throw error;
+            if (error) return response.render('error_msg', {
+                layout: 'error',
+                message: 'Błąd bazy danych',
+                style: '/error.css'
+            });
 
             response.redirect('/');
         });
@@ -170,12 +208,20 @@ app.get('/delete/:taskID', (request, response) => {
     const {taskID} = request.params;
 
     connection.getConnection((error, connection) => {
-        if (error) throw error;
+        if (error) return response.render('error_msg', {
+            layout: 'error',
+            message: 'Błąd połączenia z bazą danych',
+            style: '/error.css'
+        });
         
         let sql = 'DELETE FROM tasks WHERE id = ?';
         connection.query(sql, [taskID], (error, q_result) => {
             connection.release();
-            if (error) throw error;
+            if (error) return response.render('error_msg', {
+                layout: 'error',
+                message: 'Błąd bazy danych',
+                style: '/error.css'
+            });
 
             response.redirect('/');
         });
@@ -185,4 +231,13 @@ app.get('/delete/:taskID', (request, response) => {
 
 app.listen(PORT, () => {
     console.log(`Server is listening on port ${PORT}...`);
+})
+
+
+app.get('*', (request, response) => {
+    response.render('error_msg', {
+        layout: 'error',
+        message: 'Nie znaleziono zasobu',
+        style: '/error.css'
+    });
 })
