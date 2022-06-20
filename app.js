@@ -132,6 +132,41 @@ app.post('/update', (request, response) => {
 })
 
 
+app.get('/new', (request, response) => {
+    response.render('edit', {
+        put: false,
+        style: '/edit.css'
+    });
+})
+
+
+app.post('/insert', (request, response) => {
+    const {title, content, color, completed} = request.body;
+
+    if (title === '' || content === '') return response.render('error_msg', {
+        layout: 'error',
+        message: 'Błąd wysyłania formularza'
+    });
+
+    
+
+    connection.getConnection((error, connection) => {
+        if (error) throw error;
+
+        let sql = 'INSERT INTO tasks (title, content, color, creation_date, completed, completion_date) VALUES (?, ?, ?, NOW()';
+        if (completed == 'on') sql += ', 1, NOW())';
+        else sql += ', 0, null)';
+
+        connection.query(sql, [title, content, color], (error, q_result) => {
+            connection.release();
+            if (error) throw error;
+
+            response.redirect('/');
+        });
+    })
+})
+
+
 app.listen(PORT, () => {
     console.log(`Server is listening on port ${PORT}...`);
 })

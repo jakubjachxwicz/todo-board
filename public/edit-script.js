@@ -3,7 +3,9 @@ document.querySelector('#btn_save').addEventListener('click', (event) => {
     
     const form = getForm();
     
-    form.setAttribute('action', '/update');
+    if (form.task_id.value === 'new') form.setAttribute('action', '/insert');
+    else form.setAttribute('action', '/update');
+
     document.querySelector('.button_group').appendChild(form);
     form.submit();
 })

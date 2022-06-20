@@ -11,11 +11,11 @@
     <h2>Kolor</h2>
     <input type="color" name="color" id="colorID" {{#if put}}value="{{ task.color }}"{{/if}}>
 
-    {{#if put}}<input type="hidden" name="task_id" id="task_idID" value="{{ task.id }}">{{/if}}
+    <input type="hidden" name="task_id" id="task_idID" value="{{#if put}}{{ task.id }}{{/if}}{{#unless put}}new{{/unless}}">
 
     <div class="button_group">
         <button id="btn_save">Zapisz</button>
-        <button id="btn_delete">Usuń zadanie</button>
+        <button id="btn_delete"{{#unless put}} style="display: none;"{{/unless}}>Usuń zadanie</button>
         <button><a href="/">Anuluj</a></button>
     </div>
 </main>

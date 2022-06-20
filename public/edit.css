@@ -76,7 +76,7 @@ input[type=color]
     margin: 32px;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-evenly;
     width: 300px;
     flex-wrap: wrap;
 }
