@@ -16,6 +16,7 @@ app.engine('hbs', handlebars.engine({
 
 // middleware
 app.use(express.static(__dirname + '/public'));
+app.use(express.urlencoded({extended: true}));
 
 
 
@@ -85,6 +86,47 @@ app.get('/task/:taskID', (request, response) => {
                     style: '/edit.css'
                 });
             }
+        });
+    });
+})
+
+
+app.post('/update', (request, response) => {
+    const {title, content, color, completed, task_id} = request.body;
+    // console.log(title);
+    // console.log(content);
+    // console.log(color);
+    // console.log(completed);
+    // console.log(task_id);
+
+    if (title === '' || content === '') return response.render('error_msg', {
+        layout: 'error',
+        message: 'Błąd wysyłania formularza'
+    });
+
+    connection.getConnection((error, connection) => {
+        if (error) throw error;
+        
+        // let sql = `UPDATE tasks SET title = ?, content = ?, color = ? `;
+        let sql = 'SELECT completed FROM tasks WHERE id = ?';
+        connection.query(sql, [task_id], (error, q_response) => {
+            // connection.release();
+            if (error) throw error;
+
+            sql = 'UPDATE tasks SET title = ?, content = ?, color = ?';
+
+            const q_completed = q_response[0].completed;
+            if (q_completed && completed === undefined) sql += ', completed = 0, completion_date = null';
+            if (!q_completed && completed == 'on') sql += ', completed = 1, completion_date = NOW()';
+            
+            sql += ' WHERE id = ?';
+
+            connection.query(sql, [title, content, color, task_id], (error, q_response) => {
+                connection.release();
+                if (error) throw error;
+
+                response.redirect('/');
+            })
         });
     });
 })

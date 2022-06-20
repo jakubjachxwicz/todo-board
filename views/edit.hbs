@@ -3,17 +3,20 @@
     <input type="text" name="title" id="titleID" {{#if put}}value="{{ task.title }}"{{/if}} maxlength="30">
 
     <h2>Treść zadania</h2>
-    <textarea name="content" id="contentID" cols="30" rows="10">{{#if put}}{{ task.content }}{{/if}}</textarea>
+    <textarea name="content" id="contentID" rows="8" spellcheck="false">{{#if put}}{{ task.content }}{{/if}}</textarea>
 
     <h2>Ukończono</h2>
     <input type="checkbox" name="completed" id="completedID" {{#if put}}{{#if task.completed}}checked{{/if}}{{/if}}>
 
     <h2>Kolor</h2>
-    <input type="color" name="color" id="colorID">
+    <input type="color" name="color" id="colorID" {{#if put}}value="{{ task.color }}"{{/if}}>
 
-    <div>
-        <button>Zapisz</button>
-        <button>Usuń zadanie</button>
+    {{#if put}}<input type="hidden" name="task_id" id="task_idID" value="{{ task.id }}">{{/if}}
+
+    <div class="button_group">
+        <button id="btn_save">Zapisz</button>
+        <button id="btn_delete">Usuń zadanie</button>
         <button><a href="/">Anuluj</a></button>
     </div>
 </main>
+<script src="/edit-script.js"></script>
