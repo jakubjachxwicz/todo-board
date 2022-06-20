@@ -11,7 +11,11 @@ document.querySelector('#btn_save').addEventListener('click', (event) => {
 })
 
 document.querySelector('#btn_delete').addEventListener('click', () => {
-    
+    if (confirm('Czy napewno chcesz trwale usunąć to zadanie?'))
+    {
+        const id = document.querySelector('#task_idID').value;
+        window.location.href = `/delete/${id}`;
+    }
 })
 
 const getForm = () => {

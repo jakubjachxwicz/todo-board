@@ -166,6 +166,22 @@ app.post('/insert', (request, response) => {
     })
 })
 
+app.get('/delete/:taskID', (request, response) => {
+    const {taskID} = request.params;
+
+    connection.getConnection((error, connection) => {
+        if (error) throw error;
+        
+        let sql = 'DELETE FROM tasks WHERE id = ?';
+        connection.query(sql, [taskID], (error, q_result) => {
+            connection.release();
+            if (error) throw error;
+
+            response.redirect('/');
+        });
+    });
+})
+
 
 app.listen(PORT, () => {
     console.log(`Server is listening on port ${PORT}...`);
