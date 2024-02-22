@@ -1,5 +1,5 @@
 USE `todo_list`;
-INSERT INTO `tasks` (title, content, creation_date, completed, completion_date) VALUES (
+INSERT INTO `tasks` (title, content, color, creation_date, completed, completion_date) VALUES (
     'Buy a fishing rod',
     'Previous is broken so go to X shop on Y street and get a Z model. Do it by saturday, because your going fishing with Dave',
     "#f71505",
